@@ -3,10 +3,15 @@
 # External dependencies
 #
 
-find_package(LibSSH2)
-find_package(LibCrypto)
-find_package(ZLIB)
-find_package(OpenSSL)
+if(BUILD_WITH_SSH)
+    find_package(LibSSH2)
+    find_package(LibCrypto)
+    find_package(ZLIB)
+endif()
+
+if(BUILD_WITH_OPENSSL)
+    find_package(OpenSSL)
+endif()
 
 if (LibSSH2_FOUND AND LibCrypto_FOUND AND ZLIB_FOUND AND OpenSSL_FOUND)
     set(SSH_DEPS_MET TRUE)
@@ -158,7 +163,7 @@ source_group_by_path(${source_path}  "\\\\.cpp$|\\\\.c$|\\\\.h$|\\\\.hpp$"
 #
 
 # Build library
-add_library(${target}
+add_library(${target} STATIC
     ${sources}
     ${headers}
 )

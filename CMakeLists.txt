@@ -22,6 +22,9 @@ include(cmake/GetGitRevisionDescription.cmake)
 include(cmake/Custom.cmake)
 include(cmake/HealthCheck.cmake)
 
+set(STATIC ON CACHE BOOL FORCE "Link libraries statically? Forced to ON")
+add_definitions(-DSTATICLIB)
+
 # Set policies
 set_policy(CMP0028 NEW) # ENABLE CMP0028: Double colon in target name means ALIAS or IMPORTED target.
 set_policy(CMP0054 NEW) # ENABLE CMP0054: Only interpret if() arguments as variables or keywords when unquoted.
@@ -63,9 +66,9 @@ string(TOUPPER ${META_PROJECT_ID} META_PROJECT_ID)
 #
 
 # Project options
-option(BUILD_SHARED_LIBS               "Build shared instead of static libraries."              ON)
-option(OPTION_SELF_CONTAINED           "Create a self-contained install with all dependencies." OFF)
-option(OPTION_BUILD_TESTS              "Build tests."                                           ON)
+option(BUILD_SHARED_LIBS               "Build shared instead of static libraries."              OFF)
+option(OPTION_SELF_CONTAINED           "Create a self-contained install with all dependencies." ON)
+option(OPTION_BUILD_TESTS              "Build tests."                                           OFF)
 option(OPTION_BUILD_DOCS               "Build documentation."                                   OFF)
 option(OPTION_BUILD_EXAMPLES           "Build examples."                                        OFF)
 option(OPTION_BUILD_SSH_BACKEND        "Build SSH backend"                                      OFF)
