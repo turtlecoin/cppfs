@@ -4,6 +4,9 @@
 #include <unistd.h>
 #include <limits.h>
 #include <sys/inotify.h>
+#ifndef _MSC_VER
+#include <sys/select.h>
+#endif
 
 #include <cppfs/cppfs.h>
 #include <cppfs/FilePath.h>
